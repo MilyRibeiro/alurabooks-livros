@@ -8,6 +8,6 @@ async function getBuscarLivrosDaAPI() {
     livros = await resposta.json();
     // console.table(livros);
     let livrosComDesconto = aplicarDesconto(livros);
-    exibirOsLivrosNatela(livrosComDesconto);
+    exibirOsLivrosNaTela(livrosComDesconto); 
 };
 

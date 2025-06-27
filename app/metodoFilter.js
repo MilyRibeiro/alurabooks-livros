@@ -8,5 +8,5 @@ function filtrarLivros() {
     const categoria = elementoBotao.value;
     let livrosFiltrados = livros.filter(livro => livro.categoria == categoria);
     // console.table(livrosFiltrados);
-    exibirOsLivrosNatela(livrosFiltrados);
+    exibirOsLivrosNaTela(livrosFiltrados);
 };

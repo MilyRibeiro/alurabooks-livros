@@ -1,16 +1,29 @@
-// const botaoFiltrarLivrosDeFront = document.getElementById('btnFiltrarLivrosFront');
-const botoes = document.querySelectorAll('.btn');
-botoes.forEach(botao => botao.addEventListener('click', filtrarLivros));
-
+const botoes = document.querySelectorAll('.btn')
+botoes.forEach(btn => btn.addEventListener('click', filtrarLivros))
 
 function filtrarLivros() {
-    const elementoBotao = document.getElementById(this.id);
-    const categoria = elementoBotao.value;
-    let livrosFiltrados = categoria == 'disponivel' ? 
-        livros.filter(livro => livro.categoria == categoria) : 
-        livros.filter(livro => livro.quantidade > 0);
-        // Dessa forma, primeiro ele verifica as categorias que existem, depois ele confere se eles possuem a quantidade acima de 0.
-        
-    // console.table(livrosFiltrados);
-    exibirOsLivrosNaTela(livrosFiltrados);
-};
+    const elementoBtn = document.getElementById(this.id)
+    const categoria = elementoBtn.value
+    let livrosFiltrados = categoria == 'disponivel' ? filtrarPorDisponibilidade() : FiltrarPorCategoria(categoria)
+    exibirOsLivrosNaTela(livrosFiltrados)
+    if (categoria == 'disponivel') {
+        const valorTotal = calcularValorTotalDeLivrosDisponiveis(livrosFiltrados)
+        exibirValorTotalDosLivrosDisponiveisNaTela(valorTotal)
+    }
+}
+
+function FiltrarPorCategoria(categoria) {
+    return livros.filter(livro => livro.categoria == categoria)
+}
+
+function filtrarPorDisponibilidade() {
+    return livros.filter(livro => livro.quantidade > 0)
+}
+
+function exibirValorTotalDosLivrosDisponiveisNaTela(valorTotal) {
+    elementoComValorTotalDeLivrosDisponiveis.innerHTML = `
+    <div class="livros__disponiveis">
+    <p>Todos os livros disponíveis por R$ <span id="valor">${valorTotal}</span></p>
+    </div>
+    `
+}
